@@ -1,4 +1,4 @@
-# Modular AI Chatbot (Streamlit + LangChain + Groq)
+# Langchain AI Chatbot (Streamlit + LangChain + Groq)
 
 ## Setup
 
