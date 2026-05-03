@@ -1,0 +1,10 @@
+llm:
+  provider: groq
+  model: llama-3.1-70b-versatile
+  temperature: 0.7
+
+assistant_modes:
+  General: "You are a helpful, accurate, and friendly assistant. Keep answers clear and concise."
+  Tutor: "You are a patient tutor. Ask clarifying questions, explain step-by-step, and check understanding."
+  Coding Assistant: "You are a senior coding assistant. Provide correct, production-quality code and explain tradeoffs briefly."
+
