@@ -3,10 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict
 
-from dotenv import load_dotenv
-
 from utils.config_loader import load_yaml_config
-from utils.env import get_env_float, get_env_str, require_env_str
+from utils.env import get_env_float, get_env_str
+from utils.secrets import require_secret_str
 
 
 @dataclass(frozen=True)
@@ -19,15 +18,16 @@ class AppSettings:
 
 def load_settings() -> AppSettings:
     """
-    Loads app settings from `config/config.yaml` and environment variables.
+    Loads app settings from `config/config.yaml` and Streamlit secrets.
 
-    Environment variables:
+    Secrets (preferred):
       - GROQ_API_KEY (required)
-      - GROQ_MODEL (optional override)
-      - TEMPERATURE (optional override)
-    """
-    load_dotenv(override=False)
 
+    Environment variables (optional overrides / fallback):
+      - GROQ_API_KEY (fallback)
+      - GROQ_MODEL (override)
+      - TEMPERATURE (override)
+    """
     cfg = load_yaml_config()
     llm_cfg = cfg.get("llm") if isinstance(cfg.get("llm"), dict) else {}
 
@@ -39,7 +39,7 @@ def load_settings() -> AppSettings:
         raise RuntimeError("`assistant_modes` must be a non-empty mapping in config/config.yaml")
     modes: Dict[str, str] = {str(k): str(v) for k, v in modes_cfg.items()}
 
-    groq_api_key = require_env_str("GROQ_API_KEY")
+    groq_api_key = require_secret_str("GROQ_API_KEY")
     groq_model = get_env_str("GROQ_MODEL", default=default_model)
     temperature = get_env_float("TEMPERATURE", default=default_temperature)
 
@@ -49,4 +49,3 @@ def load_settings() -> AppSettings:
         temperature=temperature,
         modes=modes,
     )
-

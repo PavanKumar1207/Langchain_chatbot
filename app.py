@@ -18,7 +18,7 @@ def main() -> None:
         settings: AppSettings = load_settings()
     except RuntimeError as exc:
         st.error(str(exc))
-        st.info("Set `GROQ_API_KEY` in your environment (or a local `.env` file) and refresh.")
+        st.info("Set `GROQ_API_KEY` in Streamlit secrets (`.streamlit/secrets.toml`) and refresh.")
         return
 
     with st.sidebar:

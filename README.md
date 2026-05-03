@@ -8,13 +8,18 @@
 pip install -r requirements.txt
 ```
 
-2) Set environment variables:
+2) Set Streamlit secrets:
 
-- `GROQ_API_KEY` (required)
-- `GROQ_MODEL` (optional override; default comes from `config/config.yaml`)
-- `TEMPERATURE` (optional override; default comes from `config/config.yaml`)
+Create `.streamlit/secrets.toml` (you can copy `.streamlit/secrets.toml.example`):
 
-Tip: copy `.env.example` to `.env` for local development.
+```toml
+GROQ_API_KEY = "your_key_here"
+```
+
+Optional environment variable overrides:
+
+- `GROQ_MODEL` (override; default comes from `config/config.yaml`)
+- `TEMPERATURE` (override; default comes from `config/config.yaml`)
 
 3) Run:
 
