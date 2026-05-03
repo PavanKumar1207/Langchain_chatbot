@@ -9,8 +9,8 @@ from utils.settings import AppSettings, load_settings
 
 
 def main() -> None:
-    st.set_page_config(page_title="Modular AI Chatbot", page_icon="💬", layout="centered")
-    st.title("Modular AI Chatbot")
+    st.set_page_config(page_title="AI Chatbot", page_icon="💬", layout="centered")
+    st.title("AI Chatbot")
 
     ensure_session_defaults()
 
@@ -41,8 +41,7 @@ def main() -> None:
         st.caption("Model")
         st.write(f"`{settings.groq_model}`")
 
-        st.caption("Temperature")
-        st.write(f"`{settings.temperature}`")
+
 
         if st.button("Clear chat", type="secondary", use_container_width=True):
             clear_session_history()
